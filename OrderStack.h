@@ -14,7 +14,7 @@ typedef int error_code;
 
 class stack {
 private:
-    int count;
+    int *top;
     Elemtype data[MAXLEN];
 public:
     stack();

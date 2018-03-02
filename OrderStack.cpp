@@ -4,16 +4,16 @@
 
 #include "OrderStack.h"
 
-stack::stack() { count = 0; };
+stack::stack() { top = data; };
 
 bool stack::empty() const {
-    return count == 0 ? true : false;
+    return top == data ? true : false;
 }
 
-error_code stack::get_top(Elemtype &x) const {
+error_code stack::get_top(Elemtype &x)  const{
     if (empty()) return Fail;
     else {
-        x = data[count - 1];
+        x = *(top-1);
         return Succeed;
     }
 }
@@ -21,8 +21,8 @@ error_code stack::get_top(Elemtype &x) const {
 error_code stack::push(const Elemtype x) {
     if (full()) return Fail;
     else {
-        data[count] = x;
-        count++;
+        *(top) = x;
+        top++;
         return Succeed;
     }
 }
@@ -30,13 +30,13 @@ error_code stack::push(const Elemtype x) {
 error_code stack::pop() {
     if (empty()) return Fail;
     else {
-        count--;
+        top--;
         return Succeed;
     }
 }
 
 bool stack::full() const {
-    if (count == MAXLEN) return true;
+    if (top == &data[MAXLEN]) return true;
     else return false;
 }
 
