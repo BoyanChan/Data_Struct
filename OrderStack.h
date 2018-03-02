@@ -14,14 +14,14 @@ typedef int error_code;
 
 class stack {
 private:
-    int *top;
+    int count;
     Elemtype data[MAXLEN];
 public:
     stack();
 
     bool empty() const;
 
-    error_code get_top(Elemtype &x) ;
+    error_code get_top(Elemtype &x) const ;
 
     error_code push(const Elemtype x);
 
