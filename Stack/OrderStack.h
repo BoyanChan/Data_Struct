@@ -11,6 +11,7 @@ typedef int error_code;
 template<typename Elemtype>
 class stack {
 private:
+
     int top;
     Elemtype data[MAXLEN];
 public:

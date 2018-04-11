@@ -1,33 +1,40 @@
 #ifndef DATA_STRUCT_OrderExample
-
-
 #include <iostream>
 #include "OrderStack.h"
 
 using namespace std;
-
-void Stack_Example() {
-    stack<int> my_stack;
-    for (int i = 1; i <= 5; i++) {
-        my_stack.push(i);
-        cout << i << " has been push in stack." << endl;
+void Stack_print(stack<int> my_stack) {
+    int flag,x;
+    while (!my_stack.empty()) {
+        flag = my_stack.get_top(x);
+        if (flag) {
+            cout << char(x);
+            my_stack.pop();
+        }
     }
-
-    while (my_stack.empty() != TRUE) {
-        int x;
-        my_stack.get_top(x);
-        cout << x << " has already pop." << endl;
-        my_stack.pop();
-    }
+    cout << endl;
 }
 
-void Dec_to_Ocx(int N) {
+void conversion(int N,int d) {
     stack<int> my_stack;
-    int Mod, x, flag;
+    int Mod;
     while (N != 0) {
-        Mod = N % 8;
-        my_stack.push(Mod);
-        N = N / 8;
+        Mod = N % d;
+        if(Mod<10) my_stack.push(Mod+48);
+        if(Mod>10) my_stack.push(Mod+87);
+        N = N / d;
+    }
+    Stack_print(my_stack);
+}
+
+
+void reserve_Output(int n){
+    char __NumberChar,x;
+    stack<char> my_stack;
+    int flag;
+    for (int i = 1;i<=n;i++){
+        cin >> __NumberChar;
+        my_stack.push(__NumberChar);
     }
     while (!my_stack.empty()) {
         flag = my_stack.get_top(x);
@@ -36,6 +43,31 @@ void Dec_to_Ocx(int N) {
             my_stack.pop();
         }
     }
-    cout << endl;
+
+}
+
+void printMatchPairs(){
+    string expr;
+    char _ca;
+    stack<int> s;
+    cin >> expr ;
+    int length = expr.size();
+    for (int i = 0;i<length;i++){
+        if (expr.at(i)=='(')
+            s.push(expr.at(i));
+        else if (expr.at(i)==')'){
+            if (s.empty())  {
+                cout << "Error" << endl;
+                exit(1);
+            } else{
+                s.pop();
+            }
+        }
+    }
+    if(!s.empty()) {
+        cout << "Error" << endl;
+        exit(1);
+    }
+    cout << "Succeed" << endl;
 }
 #endif

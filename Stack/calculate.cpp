@@ -11,7 +11,7 @@
     遇到是符号，就将处于栈顶两个数字出栈，进行运算，
     运算结果进栈，一直到最终获得结果。
  */
-/*
+
 #include <iostream>
 #include <stack>
 #include <cmath>
@@ -26,8 +26,9 @@ bool Number(char ch)//判断是否为数字，是则返回true
 void InPut(char *&str)//接收输入的中缀表达式的函数，并简单判断是否合法
 {
     cout << "Please Enter What You Want To calculation:" << endl;
-    while (1) {
+    while (true) {
         cin >> str;
+
 
         if (Number(str[0]))//中缀表达式的第一个必定是数字，如果不是，则非法
         {
@@ -196,9 +197,8 @@ void FunTest() {
     cout << "The Result Is: " << CountBack(GetBack()) << endl;
 }
 
-int main() {
+int run() {
     FunTest();
     system("pause");
     return 0;
 }
-*/
