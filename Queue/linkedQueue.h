@@ -51,7 +51,9 @@ linkedQueue<T>::linkedQueue() {
 
 template<typename T>
 bool linkedQueue<T>::empty() {
-    return queueBack == queueFront;
+    if (queueBack == queueFront)
+        return 1;
+    else return 0;
 }
 
 template<typename T>
@@ -61,7 +63,8 @@ int linkedQueue<T>::size() {
 
 template<typename T>
 void linkedQueue<T>::front(T &element) {
-    element = queueFront->next->element;
+    if(empty()) element = 0;
+    else element = queueFront->next->element;
 }
 
 template<typename T>
@@ -81,7 +84,7 @@ void linkedQueue<T>::pop() {
 template<typename T>
 void linkedQueue<T>::push(T x) {
     chainNode<T> *newnode;
-    newnode = new chainNode<T>(x, NULL);
+    newnode = new chainNode<T>(x);
     if (queueSize == 0) queueFront->next = newnode;
     else queueBack->next = newnode;
     queueBack = newnode;

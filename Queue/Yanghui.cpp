@@ -25,7 +25,3 @@ void Out_Number(int N){
         cout << endl;
     }
 }
-
-int main(){
-    Out_Number(7);
-}
