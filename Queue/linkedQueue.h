@@ -75,10 +75,11 @@ void linkedQueue<T>::back(T &element) {
 template<typename T>
 void linkedQueue<T>::pop() {
     chainNode<T> *temp;
-    temp = queueFront->next->next;
-    delete queueFront->next;
-    queueFront->next = temp;
+    temp = queueFront->next;
+    queueFront->next = temp->next;
+    delete temp;
     queueSize--;
+    if(queueFront->next = nullptr) queueFront = queueBack;
 }
 
 template<typename T>
