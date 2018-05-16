@@ -1,6 +1,6 @@
 #include <iostream>
 #include "LinkedList.h"
-
+#include "CircList.h"
 
 
 using  namespace std;
@@ -9,61 +9,113 @@ using  namespace std;
 
 void InsertOrder(){
 
-    int Arrar[10];
-    for(int i = 0;i <=9;i++)
-        Arrar[i] = i+1;
-    LinkList<int> a(Arrar,10);
+    List<int> a;
+    int flag = 1;
+    a.input(-1);
 
     int Ins_Ele=6;
-    for(int i = 1;i<=a.GetLength();i++){
+    cout<<"插入前"<<endl;
+    a.output();
+
+    for(int i = 1;i<=a.Length();i++){
         int Elem;
-        a.GetElem(i,Elem);
+        a.getData(i,Elem);
         if(Elem<Ins_Ele) continue;
-        else {a.InsertElem(i,Ins_Ele);
+        else {
+            flag = 0;
+            a.Insert(i,Ins_Ele);
             break;}
     }
-
-    for(int i = 1;i<=a.GetLength();i++){
-        int Elem;
-        a.GetElem(i,Elem);
-        cout << Elem << endl;
-    }
+    if(flag) a.Insert(a.Length(),Ins_Ele);
+    cout<<"插入后"<<endl;
+    a.output();
 }
 
-void OddEven(){
-    int Arrar[100];
-    for(int i = 0;i <=19;i++)
-        Arrar[i] = i+1;
-    LinkList<int> a(Arrar,20);
+void Divided(){
+    List<int> a;
+    List<int> b;
+    List<int> c;
+    a.input();
+    a.output();
+    int x;
+    for(int i = 1;i<=a.Length();i++){
+        a.getData(i,x);
+        if(i%2==0) {
+            c.Insert(i/2,x);
+            }
+        else {
+            b.Insert((i/2+1),x);}
+    }
 
-    LinkList<int> odd_list,even_list;
-    a.PRINT();
-    int odd=1,even=1,Elem;
-    for (int i =1;i<=a.GetLength();i++) {
-        a.GetElem(i, Elem);
-        if (i % 2) {
-            odd_list.InsertElem(odd, Elem);
-            odd++;
-        } else {
-            even_list.InsertElem(even, Elem);
-            even++;
+    b.output();
+    c.output();
+}
+
+void Binji(){
+    List<int> a;
+    List<int> b;
+    a.input();
+    b.input();
+
+    List<int> c;
+
+    int i = min(a.Length(),b.Length());
+
+
+    int countA=1;
+    int countB=1;
+    while(countA<=i&&countB<=i){
+        int elemA,elemB;
+        a.getData(countA,elemA);
+        b.getData(countB,elemB);
+        if(elemA==elemB){
+            c.Insert(elemA);
+            countA++;
+            countB++;
+        }
+        if(elemA<elemB) {
+            c.Insert(elemA);
+            countA++;
+        }
+        if(elemB<elemA){
+            c.Insert(elemB);
+            countB++;
         }
     }
-    odd_list.PRINT();
-    even_list.PRINT();
+    a.output();
+    b.output();
+    countA--;
+    countB--;
+if(countA<a.Length()){
+    int elem;
+    countA++;
+    for(countA;countA<=a.Length();countA++){
+        a.getData(countA,elem);
+        c.Insert(elem);
+    }
+}
+else if (countB<b.Length()){
+    int elem;
+    countB++;
+    for(countB;countB<=b.Length();countB++){
+        b.getData(countB,elem);
+        c.Insert(elem);
+    }
+}
+    c.output();
 }
 
-void INsertSec(){
-    int Arrar[100],Brrar[100];
-    for(int i = 0;i <=9;i++)
-        Arrar[i] = i+1;
-    LinkList<int> a(Arrar,10);
-    for(int i = 4;i <=14;i++)
-        Brrar[i-4] = i+1;
-    LinkList<int> b(Brrar,10);
-    LinkList<int> c;
-    a.PRINT();
-    b.PRINT();
-    c.InsertSec(a,b);
-    c.PRINT();
-}//UNFINISHED
+template <typename T>
+void Josephus(CircList<T>& Js,int n,int m){
+
+}
+
+
+int main(){
+    CircList<int> clist;
+    int i = 1;
+    for(i;i<=8;i++)
+    clist.Insert(i,i);
+    clist.Josephus(8,3);
+    cout<<"2 Win"<<endl;
+}

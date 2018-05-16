@@ -79,7 +79,7 @@ void linkedQueue<T>::pop() {
     queueFront->next = temp->next;
     delete temp;
     queueSize--;
-    if(queueFront->next = nullptr) queueFront = queueBack;
+    if(queueFront->next == nullptr) queueFront = queueBack;
 }
 
 template<typename T>

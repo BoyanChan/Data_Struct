@@ -1,28 +1,26 @@
 #include "F:\Code\Data Struct\Queue\linkedQueue.h"
-#include <fstream>
+#include <iostream>
+using namespace std;
 
 using namespace std;
 #define COUNT 10
 typedef struct BTNode {
     char data;
-    int floor;
     struct BTNode *pLchild;
     struct BTNode *pRchild;
 } BTNode, *BTree;
-
-ofstream fout;
 
 int Numofleaves = 0;
 
 void prettyPrintTree(BTree  node, string prefix, bool isLeft);
 
-void create_tree(BTree &, int);
+void create_tree(BTree &);
 
 int Height(BTree);
 
 void NumberOfLeaves(BTree);
 
-void in_traverse_output_value(BTree);
+void in_traverse_output_value(BTree,int);
 
 
 int max(int, int);
@@ -37,38 +35,38 @@ void visit(BTree);
 
 void levelOrder(BTree);
 
-int Test() {
-    fout.open("F:/Code/Data Struct/BinaryTree/BinaryTreeOutput.out");
+int TEST() {
 
-    BTree pTree = NULL;
 
-    create_tree(pTree, 1);
+    BTree pTree = nullptr;
 
-    fout << "Pre_Traverse:" << endl;
+    create_tree(pTree);
+
+    cout << "Pre_Traverse:" << endl;
     pre_traverse(pTree);
-    fout << endl;
+    cout << endl;
 
-    fout << "In_Traverse:" << endl;
+    cout << "In_Traverse:" << endl;
     in_traverse(pTree);
-    fout << endl;
+    cout << endl;
 
-    fout << "Beh_Traverse:" << endl;
+    cout << "Beh_Traverse:" << endl;
     beh_traverse(pTree);
-    fout << endl;
-    fout << endl;
+    cout << endl;
+    cout << endl;
 
-    fout << "The Height of Tree is " << Height(pTree) << endl;
-    fout << endl;
+    cout << "The Height of Tree is " << Height(pTree)+1 << endl;
+    cout << endl;
     Numofleaves = 0;
     NumberOfLeaves(pTree);
-    fout << "The Number of Leaves is " << Numofleaves << endl<<endl;
+    cout << "The Number of Leaves is " << Numofleaves << endl<<endl;
 
-    in_traverse_output_value(pTree);
-    fout<<endl;
+    in_traverse_output_value(pTree,1);
+    cout<<endl;
 
-    fout << "Travle by Level:";
+    cout << "Travle by Level:";
     levelOrder(pTree);
-    fout<<endl<<endl;
+    cout<<endl<<endl;
 
 
     prettyPrintTree(pTree,"", true);
@@ -78,7 +76,7 @@ int Test() {
 
 void prettyPrintTree(BTree node, string prefix , bool isLeft ) {
     if (node == nullptr) {
-        fout << "Empty tree";
+        cout << "Empty tree";
         return;
     }
 
@@ -86,20 +84,20 @@ void prettyPrintTree(BTree node, string prefix , bool isLeft ) {
         prettyPrintTree(node->pRchild, prefix + (isLeft ? "|   " : "    "), false);
     }
 
-    fout << prefix + (isLeft ? "â””â”€â”€ " : "â”Œâ”€â”€ ") + node->data + "\n";
+    cout << prefix + (isLeft ? "©¸©¤©¤ " : "©°©¤©¤ ") + node->data + "\n";
 
     if (node->pLchild) {
-        prettyPrintTree(node->pLchild, prefix + (isLeft ? "    " : "â”‚   "), true);
+        prettyPrintTree(node->pLchild, prefix + (isLeft ? "    " : "©¦   "), true);
     }
 }
 
-void in_traverse_output_value(BTree pTree) {
+void in_traverse_output_value(BTree pTree,int n ) {
     if (pTree) {
         if (pTree->pLchild)
-            in_traverse_output_value(pTree->pLchild);
-        fout << pTree->data << " In the " << pTree->floor << " floor." << endl;
+            in_traverse_output_value(pTree->pLchild,n+1);
+        cout << pTree->data << " In the " << n << " floor." << endl;
         if (pTree->pRchild)
-            in_traverse_output_value(pTree->pRchild);
+            in_traverse_output_value(pTree->pRchild,n+1);
     }
 }
 
@@ -143,19 +141,18 @@ void NumberOfLeaves(BTree pTree) {
 
 
 void visit(BTNode *t) {
-    fout << t->data << " ";
+    cout << t->data << " ";
 }
 
-void create_tree(BTree &t, int n) {
+void create_tree(BTree &t) {
     char ch;
     cin >> ch;
     if (ch == '#') t = NULL;
     else {
         t = new BTNode;
         t->data = ch;
-        t->floor = n;
-        create_tree(t->pLchild, n + 1);
-        create_tree(t->pRchild, n + 1);
+        create_tree(t->pLchild);
+        create_tree(t->pRchild);
     }
 }
 
@@ -163,7 +160,7 @@ void create_tree(BTree &t, int n) {
 
 
 /*
-å‰åºéå†çš„é€’å½’å®ç°
+Ç°Ğò±éÀúµÄµİ¹éÊµÏÖ
 */
 void pre_traverse(BTree pTree) {
     if (pTree) {
@@ -176,7 +173,7 @@ void pre_traverse(BTree pTree) {
 }
 
 /*
-ä¸­åºéå†çš„é€’å½’å®ç°
+ÖĞĞò±éÀúµÄµİ¹éÊµÏÖ
 */
 void in_traverse(BTree pTree) {
     if (pTree) {
@@ -189,7 +186,7 @@ void in_traverse(BTree pTree) {
 }
 
 /*
-ååºéå†çš„é€’å½’å®ç°
+ºóĞò±éÀúµÄµİ¹éÊµÏÖ
 */
 void beh_traverse(BTree pTree) {
     if (pTree) {
